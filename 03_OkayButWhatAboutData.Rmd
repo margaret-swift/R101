@@ -1,0 +1,32 @@
+---
+title: "Okay, But What About Data?"
+author: "Margaret Swift"
+date: "04 Aug 2020"
+
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    toc: true
+---
+________________________________________________________________________________
+
+The focus of this module is to actually open up some of your data files! I 
+promise you: ANYTHING you can do in Excel, you can do in R, probably faster
+and with less hassle. But moving from Excel can be a bit nerve-wracking, so we  
+will take things one step at a time.
+
+Programming terms introduced in this section: **working directory**.
+
+## PART 1: Where Am I?
+
+
+## PART 2: How Do I See My Data?
+
+
+## PART 3: What About Graphs And Stuff?
+
+
+________________________________________________________________________________
+And now we're done! You should now be familiar with ...
+
+When you're ready, move on to the next: "Make It Pretty!", in a file called "04_MakeItPretty".

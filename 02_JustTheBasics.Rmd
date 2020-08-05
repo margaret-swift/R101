@@ -1,0 +1,36 @@
+---
+title: "Just the Basics"
+author: "Margaret Swift"
+date: "04 Aug 2020"
+
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    toc: true
+---
+________________________________________________________________________________
+
+
+The focus of this module is to introduce basic programming concepts like 
+variables and lists and conditional formatting. If these things are familiar
+to you, you can just have a skim to learn R's particular syntax. If this is 
+all sounding like a foreign language, then read on!
+
+Programming terms introduced in this section: **list, syntax**.
+
+## PART 1: Variables
+
+
+## PART 2: Lists
+
+
+## PART 3: Logic
+
+
+## PART 4: Ifs, Ands, Or Else!
+
+
+________________________________________________________________________________
+And now we're done! You should now be familiar with ...
+
+When you're ready, move on to the next: "Okay, But What About Data?", in a file called "03_OkayButWhatAboutData".
