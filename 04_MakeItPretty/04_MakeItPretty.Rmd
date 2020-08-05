@@ -1,0 +1,104 @@
+---
+title: "Introduction to R"
+subtitle: "Module 04: Make It Pretty!"
+author: "Margaret Swift mes114@duke.edu"
+date: "04 Aug 2020"
+
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    toc: true
+  variant: markdown_strict+line_blocks
+---
+***
+
+The focus of this module is to make things pretty. We'll cover how to make
+your graphs look nice, best practices to keep you organized, and how to create
+PDFs of your lab reports (so you don't have to copy and paste or take pictures
+of your code to turn it in!).
+
+**Programming terms introduced:** 
+
+**Shortcuts introduced:**
+*For Mac users, substitute CMD for CTRL.*
+
+Follow the prompts labeled <span style="color:orange">**Try This**</span> to start exploring R on your own.
+
+## PART 1: Pretty Graphs
+
+```{r}
+x <- c(1, 2, 3)
+y <- c(4, 5, 6)
+plot(x,y)
+```
+
+
+```{r}
+library(ggplot2)
+x <- c(1, 2, 3)
+y <- c(4, 5, 6)
+df <- data.frame(x,y)
+ggplot(data=df, aes(x=x,y=y)) + geom_point()
+```
+
+## PART 2: Organization Is Key
+
+**File Structure:** I cannot stress this one enough. *Please* don’t just dump your files onto your desktop or into the downloads folder. Folders and subfolders dedicated to a single use will be easier to manage and keep you less stressed. Here’s an example of how I’d structure my folders for the semester:
+
+| - 2020Fall
+|    + STA532
+|     - ENV710
+|        + Lab1
+|        + Lab2
+|         - Lab3
+|            Lab3.pdf
+|            Lab3.Rmd
+
+**Code Structure:** Here's an example of how I usually structure my files. You don't have to follow this method exactly, but having a similar structure across scripts can be a helpful tool to make your programming more uniform and easy to read:
+
+```{r, eval=FALSE}
+# ExampleScript.R
+# Created: 04 Aug 2020
+# Author:  Margaret Swift [mes114@duke.edu]
+
+# This script is just an example of how to structure your code; you can (and 
+# should) come up with your own way of doing things. 
+
+###############################################################################
+# Set up workspace
+###############################################################################
+
+rm(list=ls()) #clear all variables in environment for a fresh start
+pacman::p_load('ggplot2') #pacman installs packages you may not already have.
+dir <- dirname(rstudioapi::getSourceEditorContext()$path) #get current folder
+setwd(dir) #set working directory to current folder
+
+###############################################################################
+# Do something
+###############################################################################
+
+# Indenting inside curly braсes helps with file readability. It's not required
+# in R, but it is a good habit to get into.
+special_numbers <- c(1, 2, 5)
+for ( number in 1:10 ) {
+  if ( number %in% special_numbers ) {  
+    print(paste(number, 'is special!')) 
+  }
+}
+
+###############################################################################
+# Save results at the end
+###############################################################################
+
+filename <- "results.txt"
+write.table('hello world', filename)
+
+```
+## PART 3: RMarkdown: Making Nice PDF Reports
+
+
+***
+And now we're done! You should now be familiar with proper file structures, ggplot, and RMarkdown.
+
+When you're ready, move on to the next: "Help, Something's Broken!", in a file called "05_HelpSomethingsBroken.html".
+

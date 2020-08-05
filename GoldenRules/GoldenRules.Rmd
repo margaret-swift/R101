@@ -1,0 +1,226 @@
+---
+title: "Maggie’s Golden Rules of (R) Programming"
+subtitle: "A supplement to the Introduction to R Series"
+author: "Margaret Swift mes114@duke.edu"
+date: "04 Aug 2020"
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: vignette
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+Learning to program is an ever-evolving process. I am always discovering more efficient methods or new ways of processing data. Here, I present you with a list of my 'golden rules' for programming. These are things that I have learned over the years that have made coding much less stressful for me; I hope they will do the same for you.
+
+This vignette is intended as a supplement while learning to code, or having already mastered the basics. I don't explain concepts like `for` loops or conditionals here; you'll have to go to my **Introduction to R** series or other resources for that kind of information.
+
+If any of you are interested in common programming practices or history, here are a few links explaining coding lingo you'll see online:  
+
+- [foobar](https://en.wikipedia.org/wiki/Foobar): `foo` and `bar` are often used as placeholder names when generally discussing a programming question, i.e. `addFunc <- function(foo,bar) { return(foo+bar) }`   
+- ["Hello World"](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program): Standard programming placeholder phrase.
+- [myVar](https://www.tutorialsteacher.com/python/python-variables): You'll see this a lot. `myVar`, `myfunc`, `myval`, etc. It's just a helpful way to generalize your code when asking a question online or explaining a concept.
+- [i, j, k](https://en.wikipedia.org/wiki/Index_notation): These are indexing variables, used within `for` loops.
+
+## A place for everything, and everything in its place.
+
+I cannot stress this one enough. *Please* don’t just dump your files onto your desktop or into the downloads folder. Folders and subfolders dedicated to a single use will be easier to manage and keep you less stressed. Here’s an example of how I’d structure my folders for the semester:
+
+- Spring2020 
+  + STA532
+  + ENV710
+  - ENV89S
+    + Readings
+    + ClimateProject
+    - FinalProject
+        + README.txt
+        + data
+        + scripts
+        + plots
+        + presentations
+
+If you *really* want to be organized, you can append numbers ('00_Readings', '01_ClimateProject', etc.) to the front of your file names to sort them as you wish. Otherwise, your operating system will probably default to alphabetical order.
+
+## What's in a name?
+Using `camelCase` to name your variables? `scores_of_underscores`? `lots.of.dots`? Doesn’t matter, just pick something and stick with it so you don’t confuse yourself later. These three conventions are all acceptable in R; be careful, though, because in other popular languages (I'm looking at you, Python), `.` represents a method and can't be used in variable names. I like to include the type of variable in the name, with suffixes like `.df` for data frames, and `.ls` for lists. This isn't mandatory by any means, but it does help me stay organized. For example, if I’m using a dataset `epa.csv`, I might have a data frame `epa.df` or a plot `epa.plot`. 
+
+While we're here, make sure your names are descriptive and consistent, for files and variables both. No more `asdf` or `temp` or `tstVr123`. A variable name should clearly state what it holds. Otherwise, when you come back to your function `func1()` in a few months, you'll have no idea what it does without reading the code. 
+
+Finally, don't use words like `for` or `TRUE` for your variable names. These are [reserved](https://www.datamentor.io/r-programming/reserved-words/) by R for special cases, and you absolutely cannot use them. Other words, like `list` and `mean` are not reserved, but it's best to stay away from them, too. In general, if something is a function or a reserved word, don't use it for a variable or function name.
+
+## Clarity and Reusability {#fixName}
+
+> "Your code will be read more times than it is written. Prioritize how easy your code is to understand rather than how quickly it is written." -- [Will Koehrsen](https://towardsdatascience.com/data-scientists-your-variable-names-are-awful-heres-how-to-fix-them-89053d2855be)
+
+Everyone structures their scripts differently; these are just my recommendations. 
+
+**Clarity**   
+I usually start my code with a header providing my name and email address; the file name; date of creation; and a brief description of the file's purpose. This is to provide (1) for other people using my code in the future, and (2) for myself, because six months from now I'm sure I won't know what the file is for, unless I've written it down.
+
+The two components of readability (besides naming conventions) are whitespace and comments. Whitespace can be vertical (inter-line spacing) or horizontal (intra-line spacing i.e. `x <- 1` instead of `x<-1`). `#Comments` are used to add insight into a line or section's purpose where there may be ambiguity. 
+
+There are many different philosophies on what constitutes 'good' coding; when you're first starting out, though, comments and spacing can help everything feel much less overwhelming, and are good habits to foster. There are whole competitions out there to program tasks in as few characters or lines as possible, but that style of coding is not what you should start out doing. Much like any other skill, you've got to learn the rules before you can know when—and how—to break them. 
+
+**Reusability**   
+Store everything. Let's say you're trying to find the probability of seeing 3 dogs at the dog park, given an average of 5. The following code will get the job done, but it's not very reusable. 
+
+```{r, eval=F} 
+dpois(x=3, lambda=5)
+dpois(x=4, lambda=5)
+dpois(x=5, lambda=5)
+```
+
+In this instance, 3, 4, and 5 are 'magic numbers' -- inputted into a function directly without an associated variable. They haven't been stored anywhere, and so if you wanted to find the probability of seeing 3, 4, and 5 dogs separately, you'd have to write out the whole line three times. Writing things out again and again can lead to errors when copying and pasting (see [DRY](#dry)), so it's best practice to save all values as variables instead:
+
+```{r, eval=F} 
+num_dogs <- c(3, 4, 5)
+avg_dogs <- 5
+for (number in num_dogs) {
+  dpois(x=number, lambda=avg_dogs)
+}
+```
+
+Even better -- you can store this code as a function for later use. This particular example isn't great, but I often use functions to do things like cleaning strings or processing data:
+
+```{r}
+fixName <- function(n) {
+  n <- tolower(as.character(n))
+  n <- gsub(" ", "_", n)
+  n <- gsub("[[:punct:]]", "", n)
+  return(n)
+}
+fixName('hEllo World!!!')
+```
+
+**Example**
+
+Here's an example of how I usually structure my files. You don't have to follow this method exactly, but having a similar structure across scripts can be a helpful tool to make your programming more uniform and easy to read:
+
+```{r, eval=FALSE}
+# ExampleScript.R
+# Created 12/11/19
+# Author: Margaret Swift
+# margaret.swift@duke.edu
+
+# This script is just an example of how to structure your code; you can (and 
+# should) come up with your own way of doing things. 
+
+###############################################################################
+# Set up workspace
+###############################################################################
+
+rm(list=ls()) #clear all variables in environment for a fresh start
+dir <- dirname(rstudioapi::getSourceEditorContext()$path) #get current folder
+setwd(dir) #set working directory to current folder
+
+###############################################################################
+# Do something
+###############################################################################
+
+# Indenting inside curly braсes helps with file readability. It's not required
+# in R, but it is a good habit to get into.
+special_numbers <- c(1, 2, 5)
+for ( number in 1:10 ) {
+  if ( number in special_numbers ) {  
+    print('special!') 
+  }
+}
+
+###############################################################################
+# Save results at the end
+###############################################################################
+
+filename <- "results.txt"
+write.table('hello world', filename)
+
+```
+
+
+
+## Inside out and broken down
+
+Let's return to our function, `fixName`, introduced [earlier](#fixname).
+```{r}
+fixName <- function(n) {
+  n <- tolower(as.character(n))
+  n <- gsub(" ", "_", n)
+  n <- gsub("[[:punct:]]", "", n)
+  return(n)
+}
+```
+
+We could have written the whole thing in one line:
+
+```{r}
+fixName <- function(n) { return( gsub("[[:punct:]]", "", gsub(" ", "_", tolower(as.character(n)) ) ) ) }
+```
+
+This second version is more condensed, but how readable is it? Not very. It's better to break down these long phrases into easily manageable chunks. This makes your code easier to read and, most importantly, makes your code easier to debug. If something goes wrong in one line, you have no idea where the error is from. But, if you've broken up your function into separate steps, debugging becomes much simpler.
+
+Let's try another example. I want to capture all values in a data frame that are larger than the mean. Instead of writing the whole command in one go, it's better to start from the inside and work outward:
+```{r, eval=FALSE}
+data <- data.frame(foo=c(1,2,3,14,0,5))
+mean( data$foo ) #find the mean 
+data$foo > mean( data$foo ) #find which data points are larger
+data[ data$foo > mean( data$foo ), ] #grab those data points
+```
+
+Better yet, use what we learned [before](#fixName) and store some of these values in variables:
+
+```{r, eval=FALSE}
+mu <- mean( data$foo )
+inx <- data$foo > mu
+data[ inx, ]
+```
+
+This is really important for functions and loops. Start with the simple case and work your way out to the wrapper when writing and troubleshooting. Then, instead of running your loop all at once and having it break, set `i=1` on your own and run through the loop line-by-line to see where the error is.
+
+## Simple is best
+A lot of times, we're tempted to use loops because they're easy or they're what we're used to. But if something can be done without a loop, it should be. This is because loops take up a lot of time and memory, especially when running over a huge dataset. So, for example, if I wanted to create a vector `p` filled with percentiles, I could use `for` loops, or I could use vector manipulation (ie `1:100`). Run the following code to see for yourself:
+
+```{r}
+n <- 500000
+
+# for loop way:
+p1 <- vector(length=n)
+end1 <- system.time(
+  for ( i in 1:n ) {
+    p1[i] <- ( i - 0.5 ) / n
+  }
+)['elapsed']
+
+# vector manipulation way:
+end2 <- system.time(
+  p2 <- (1:n - 0.5) / n
+)['elapsed']
+
+cat('for loop: ', end1, 'sec.\n', 'vector: ', end2, 'sec.')
+```
+As you can see, the `for` loop option is *much* slower than using ranges, despite running the same calculation. Nested loops compound this.  `for` loops are useful, yes, but be careful that you know their weaknesses.
+
+## DRY --- Don't Repeat Yourself {#dry}
+All this said, one of the most important rules I've learned is --- Don't Repeat Yourself. If you're copying and pasting code from one place to another, you're not being very efficient. Whenever possible, use vector manipulation, loops, or functions like `sapply` to accomplish a task multiple times without repeating yourself. Something that my dad always liked to tell me about skiing seems appropriate here--the goal of the thing is to *do no work*. Think of programming as trying to be as lazy as possible--don't copy and paste when a better method is availab
+le.
+
+This also goes for creating utility files for larger projects. If you find yourself writing and re-writing a function to find a certain file, or to plot a certain graph, in every file of your project --- it may be well worth it to put all of your functions into one big 'Utilities.R' file that is accessed by every other script, using `source('Utilities.R')`. I do this for all of my projects.
+
+
+## Idiot-proof your code
+When writing functions, be sure to account for user error. Don’t assume that the user (who may well be your future self!) remembered to sort the data before passing it to the function—sort it for them upon arrival. Don’t assume that vector 1 and vector 2 will be the same length—compare the two and print an error with `warning()` if they don’t match:
+
+``` {r} 
+plot.vecs.func <- function( x, y ) {
+  if ( length (x) != length(y) ) {
+    warning('WARNING: Samples have different length!')
+  } else { plot(x, y) }
+}
+plot.vecs.func(c(1, 2, 3), c(5, 6))
+```
+
+
+## Google is your friend
+Google is your friend. When in doubt, copy and paste that error into Google. Sites like https://www.stackoverflow.com are great for crowd-sourcing issues you're having; often, someone else has already asked your question.

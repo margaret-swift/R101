@@ -1,6 +1,7 @@
 ---
-title: "Okay, But What About Data?"
-author: "Margaret Swift"
+title: "Introduction to R"
+subtitle: "Module 03: Okay, But What About Data?"
+author: "Margaret Swift mes114@duke.edu"
 date: "04 Aug 2020"
 
 output:
@@ -8,14 +9,19 @@ output:
     theme: leonids
     toc: true
 ---
-________________________________________________________________________________
+***
 
 The focus of this module is to actually open up some of your data files! I 
 promise you: ANYTHING you can do in Excel, you can do in R, probably faster
 and with less hassle. But moving from Excel can be a bit nerve-wracking, so we  
 will take things one step at a time.
 
-Programming terms introduced in this section: **working directory**.
+**Programming terms introduced:** 
+
+**Shortcuts introduced:**
+*For Mac users, substitute CMD for CTRL.*
+
+Follow the prompts labeled <span style="color:orange">**Try This**</span> to start exploring R on your own.
 
 ## PART 1: Where Am I?
 
@@ -26,7 +32,7 @@ Programming terms introduced in this section: **working directory**.
 ## PART 3: What About Graphs And Stuff?
 
 
-________________________________________________________________________________
+***
 And now we're done! You should now be familiar with ...
 
-When you're ready, move on to the next: "Make It Pretty!", in a file called "04_MakeItPretty".
+When you're ready, move on to the next: "Make It Pretty!", in a file called "04_MakeItPretty.html".

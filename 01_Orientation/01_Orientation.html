@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Margaret Swift mes114@duke.edu" />
+
+<meta name="date" content="2020-08-04" />
+
+<title>Introduction to R</title>
+
+
+
+
+
+
+<link rel="stylesheet" href="01_Orientation_files/style.css" type="text/css" />
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<div class="row">
+<div class="col s12 m3">
+<div class="table cover">
+<div class="cover-card table-cell table-middle">
+<span class="author_name">Introduction to R</span>
+<span class="author_job">Module 01: Orientation</span>
+<span class="author_bio mbm">Margaret Swift <a href="mailto:mes114@duke.edu" class="email">mes114@duke.edu</a></span>
+<span class="author_bio mbm">04 Aug 2020</span>
+</div>
+</div>
+</div>
+
+
+<div class="col s12 m9">
+<div class="post-listing">
+<div id="TOC" class="toc">
+<ul>
+<li><a href="#part-1-downloading-r-and-rstudio">PART 1: Downloading R and RStudio</a><ul>
+<li><a href="#the-novel-steps-to-download-and-install-r">The Novel: Steps to download and install R</a></li>
+<li><a href="#the-fixins-steps-to-download-and-install-rstudio">The Fixins: Steps to download and install RStudio</a></li>
+</ul></li>
+<li><a href="#part-2-all-those-windows">PART 2: All Those Windows</a><ul>
+<li><a href="#pane-1-files-plots-packages-help-viewer">Pane 1: Files, Plots, Packages, Help, Viewer</a></li>
+<li><a href="#pane-2-the-console">Pane 2: The Console</a></li>
+<li><a href="#pane-3-environment-and-history">Pane 3: Environment and History</a></li>
+<li><a href="#pane-4-scripts">Pane 4: Scripts</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="post">
+<article class="post-content">
+<hr />
+<p>Welcome to ENV 710! I’m one of your TA’s, Maggie, and I’m going to be going through some of the basics of programming and R so that you all are ready when the class starts up.</p>
+<p>The focus of this module is to introduce all of you to R and RStudio, so you can get a feel for what R is and how to use it. If you already have RStudio downloaded and ready to go, you can skip on down to Part 2: All Those Windows.</p>
+<p><strong>Programming terms introduced:</strong> argument, assign, console, CRAN, echo, environment, extension, function, GUI, open-source, package, programming language, R, RStudio, return, script, value, variable.</p>
+<p><strong>Shortcuts introduced:</strong> SHIFT+CTRL+N [create new R script]; CTRL+ENTER [run selected lines]; UP arrow [move back through previous commands]. <em>For Mac users, substitute CMD for CTRL.</em></p>
+<p>Follow the prompts labeled <span style="color:orange"><strong>Try This</strong></span> to start exploring R on your own.</p>
+<div id="part-1-downloading-r-and-rstudio" class="section level2">
+<h2>PART 1: Downloading R and RStudio</h2>
+<p><em>This section will get you started with R and RStudio. By the end, you should have both downloaded and able to run on the computer you’re using for this class.</em></p>
+<p>One of the most frequent questions I get for this section is “What’s the difference between R and RStudio? Do I have to have both?” Yes, you do have to have both. <strong>R</strong> is a <strong>programming language</strong>, which means that it tells your computer what to do. R is like the words in a book: the information stored inside is what tells your brain what’s going on. <strong>RStudio</strong> is an interface, often called a <strong>GUI</strong> for “Graphical User Interface” (said like “gooey”). RStudio is just a nice wrapper for R so that you can program with less stress. Think of RStudio as the cover, pages, pictures, and glossary in a book; you don’t need these things to read a novel, but it’s definitely a lot easier than reading one long line of text.</p>
+<p>So, for this class, we need both the novel (R) and all the <a href="https://www.quora.com/What-is-the-meaning-of-the-phrase-with-all-the-fixins">fixins</a> that make it easy to read (RStudio).</p>
+<div id="the-novel-steps-to-download-and-install-r" class="section level3">
+<h3>The Novel: Steps to download and install R</h3>
+<ol style="list-style-type: decimal">
+<li>Click this link <a href="http://archive.linux.duke.edu/cran/" class="uri">http://archive.linux.duke.edu/cran/</a> to access the R download page. This is hosted on a website called <strong>CRAN</strong> (The Comprehensive R Archive Network), and you’ll be using it a lot with R.</li>
+<li>Click the appropriate link for your operating system in the “Download and Install R” section.</li>
+<li>Next, click the link labeled something like “R-x.x.x.pkg (notarized and signed)”. This will start the download of the latest version of R. At the time of this writing, the latest should be “R-4.0.2.pkg”, but it’s updated regularly.</li>
+<li>Once your download is finished, find it in your “Downloads” folder and double-click to open. Follow the instructions on the installer (accepting all the defaults).</li>
+<li>You have now installed R! Congrats!</li>
+</ol>
+</div>
+<div id="the-fixins-steps-to-download-and-install-rstudio" class="section level3">
+<h3>The Fixins: Steps to download and install RStudio</h3>
+<ol style="list-style-type: decimal">
+<li>Click this link <a href="https://rstudio.com/products/rstudio/download/#download" class="uri">https://rstudio.com/products/rstudio/download/#download</a> to access the RStudio download page.</li>
+<li>Click the appropriate link for your operating system in the “Download and Install R” section. You can skip Step 1 because you already have R installed.</li>
+<li>Once your download is finished, find it in your “Downloads” folder and double-click to open. Follow the instructions on the installer (accepting all the defaults).</li>
+<li>You have now installed RStudio! Congrats!</li>
+</ol>
+</div>
+</div>
+<div id="part-2-all-those-windows" class="section level2">
+<h2>PART 2: All Those Windows</h2>
+<p><em>This section will orient you to All Those Windows that you see when you first open RStudio. There are a lot of things going on, but I promise that it’ll get less overwhelming once we go over their uses and functions!</em></p>
+<p>Before we get started, find the place where you installed RStudio (likely in your Applications folder) and double-click to open it. If you have any errors or problems so far, <span style="color:red; font-weight:bold">STOP</span> and email me (<a href="mailto:mes114@duke.edu" class="email">mes114@duke.edu</a>) with your question and a copy-paste or screenshot of the issue.</p>
+<p>When you open RStudio for the first time, you should see four window panes inside the application. If you have only three, don’t worry, we’ll address that later on down the page. You can choose to change the orientation of the panes (and things like the background and font size/color) from the Preferences menu, but for now, we’ll deal with the panes as they are “out of the box”.</p>
+<div id="pane-1-files-plots-packages-help-viewer" class="section level3">
+<h3>Pane 1: Files, Plots, Packages, Help, Viewer</h3>
+<p>This pane is going to be your best friend. Here you can see any plots you’ve made, view where your files and packages are, and most importantly, use the Help menu.</p>
+<p><strong>Files:</strong> This is just like your Finder (Mac) or File Explorer (Windows). You can open files from here.</p>
+<p><strong>Plots:</strong> This will be empty right now, but this’s where your graphs and figures will show up.</p>
+<p><strong>Packages:</strong> R is called an <strong>open-source language</strong>, which means that users can create free content called <strong>packages</strong> for anyone else to use. We will cover packages in the next module.</p>
+<p><strong>Help:</strong> Use the Help menu when you don’t know what something does.</p>
+<p><strong>Viewer:</strong> This lets you look at web content; you won’t need it right now.</p>
+<p><span style="color:orange"><strong>Try This:</strong></span> Type <code>sum</code> into the Help search bar. A document should show up describing the <code>sum()</code> function in R. Does its description make sense to you?</p>
+<p><span style="color:orange"><strong>Try This:</strong></span> Click on the check boxes in the Packages menu. What happens in the console?</p>
+</div>
+<div id="pane-2-the-console" class="section level3">
+<h3>Pane 2: The Console</h3>
+<p>All right, now we’re at the console! You might also see tabs labeled Terminal, R Markdown, and Jobs, but just ignore those for now.</p>
+<p>The <strong>console</strong> is your main interface to R. Anything you type in there, the console will tell R to do it. The most basic thing we can do with R is to use it as a calculator. Type <code>5 + 6</code> into the console, then press enter. There will be two numbers that R returns to you: <code>[1]</code> and <code>11</code>. If <code>11</code> is our answer, then what is the <code>[1]</code> for? This is R’s way of telling us that <code>11</code> is the first thing it’s returning. Since there’s only one thing, it’s kind of redundant for now; later on, though, we will deal with things like lists and data frames that might deal with more than one item.</p>
+<p>Remember that <code>sum()</code> function we looked up earler? Type <code>sum(5, 6)</code> into the console. Press enter to see the results—is it what you expected? The description says that <code>sum</code> “returns the sum of all the values present in its arguments”. <code>sum</code> is a function that takes arguments. An <strong>argument</strong> is something that you give to the <strong>function</strong> for it to do something with. In this case, we gave <code>sum</code>, the function, arguments of 5 and 6. Then, <code>sum</code> will <strong>return</strong>, or give us back, the sum of those two arguments.</p>
+<p><span style="color:orange"><strong>Try This:</strong></span> There are a lot of other functions you’ll be familiar with from an introductory statistics course; explore concepts like <code>mean()</code> and <code>mode()</code> with different arguments. If you don’t remember what these terms mean, you can use the Help menu or type <code>?mean</code> into the console.</p>
+</div>
+<div id="pane-3-environment-and-history" class="section level3">
+<h3>Pane 3: Environment and History</h3>
+<p><strong>Environment:</strong> Your <strong>environment</strong> is everything that you’ve defined in this session of R. Some people use this tab a lot, others not so much. It’s really up to you. I like it because I can see everything that I’ve saved so far, in the state that I saved it.</p>
+<p>You probably don’t have anything in here yet, so head back to the console and type <code>a &lt;- 3</code>. This is called <strong>assigning a variable</strong>; you’re telling R that you want the <strong>variable</strong> <code>a</code> to hold the <strong>value</strong> <code>3</code>, by linking them with the little left-arrow <code>&lt;-</code>. The arrow is unique to R, and most other programming languages just use a <code>=</code> instead. It’s fine if you want to do it this way. One of the fun things about R is that there are many ways to accomplish the same task, and there is rarely one ‘right’ way to do things. You can come up with your own personal style.</p>
+<p>You should see something change in the Environment now—a little chart that tells you that <code>a</code> equals <code>3</code>. We’ll talk in the next section about this in more detail, but you can see if you’ve got a lot of variables floating around, how nice it is to have a list of all of them.</p>
+<p><strong>History:</strong> Exactly what it sounds like. It holds everything you’ve typed in so far this session.</p>
+<p><span style="color:orange"><strong>Try This:</strong></span> Type <code>3 &lt;- a</code> into the console. What happens?</p>
+<p><span style="color:orange"><strong>Try This:</strong></span> Go to the console and press the UP arrow key on your keyboard. What happens? And when you press enter? Try scrolling up even farther.</p>
+</div>
+<div id="pane-4-scripts" class="section level3">
+<h3>Pane 4: Scripts</h3>
+<p>By this point you may have realized that you don’t have a 4th pane. If not, no worries; the last pane is to hold your <strong>scripts</strong>, which are like a list of instructions for R to carry out. Instead of typing in things like <code>5 + 6</code> and <code>a &lt;- 3</code> every time you open up RStudio, you can save your work. To create a new script, go to the very top left corner of your screen and click the white box with a green plus on it, then select “R Script”. Or, try SHIFT+CTRL+N (SHIFT+CMD+N for Mac users) for a shortcut. Either way, a new script should appear in the fourth pane. You can also go to the 01_Orientation folder and double-click the file with a ‘.R’ <strong>extension</strong> at the end of its name; this will open a blank script you can use for this tutorial.</p>
+<p>Scripts work just the same as your console, but (1) you can save your work, and (2) you can run many lines at once. Try typing this into your script: <code>a &lt;- 8</code>, then press enter, then type <code>a + 3</code> in the next line. Each command in a script in R must be on a separate line.</p>
+<p>Now, there are a couple of ways to get what you just typed over to the console. You could copy and paste it over, but that would be silly. Instead, highlight the two lines you just typed, then click the green right-arrow that says “Run” on the top of your scripts section. You should see both lines <strong>echoed</strong> over in the console now, with the answer as well.</p>
+<p>Anything you highlight will run in order. You can also run the selected code by pressing CTRL+ENTER (CMD+ENTER for Mac users).</p>
+<p><span style="color:orange"><strong>Try This:</strong></span> If you don’t highlight anything and press Run, what happens?</p>
+<p><span style="color:orange"><strong>Try This:</strong></span> Create some variables in your new script then save and close RStudio. Reopen the file. What happened to the environment? Highlight the entire script and run it. What does the environment look like now?</p>
+<hr />
+<p>And now we’re done! You should now be familiar with all the windows and panes in RStudio. Try going to your settings to customize how you want your RStudio to look. You’ll be using this a lot, so it’s worth your time. For me, I have my scripts in top left, console top right, environment bottom left, and plots/help bottom right.</p>
+<p>When you’re ready, move on to the next: “Just the Basics”, in a file called “02_JustTheBasics”.</p>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

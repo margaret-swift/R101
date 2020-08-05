@@ -1,0 +1,80 @@
+---
+title: "Introduction to R"
+subtitle: "Module 05: Help, Something's Broken!"
+author: "Margaret Swift mes114@duke.edu"
+date: "04 Aug 2020"
+
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    toc: true
+---
+***
+
+The focus of this module is to help you with basic troubleshooting, or **debugging** as we call it in program-speak. 
+
+For errors not covered here, my best advice is to **just Google it**. Google is your friend! Google has all the answers! There's a website called [Stack Overflow](https://stackoverflow.com) where lots of people post questions and crowd-source answers; it's likely that someone else has already asked this question. If you're into Reddit, the subreddit [r/Rlanguage](https://reddit.com/r/RLanguage) is also a good source for community-based programming help. Or, email me at mes114@duke.edu if you're still stuck, attaching (1) your code, (2) the text of the error that you received, and (3) a list of steps you've already tried to fix the problem.
+
+**Programming terms introduced:** debugging, ["Rubber Duck Debugging"](https://en.wikipedia.org/wiki/Rubber_duck_debugging)
+
+
+**Shortcuts introduced:** CTRL+C [to cancel a command in console]
+*For Mac users, substitute CMD for CTRL.*
+
+## PART 1: I Feel Like I'm Going To Cry
+> "Frustration is the path to the dark side. Frustration leads to anger. Anger leads to hate. Hate leads to bad code and low self-esteem." --- Yoda, probably.
+
+Coding can be really fun, but it can be really, really frustrating sometimes. If you find yourself getting angry or otherwise emotional, just stop. Take a deep breath. Close your laptop and take a walk outside. Eat something. Drink something. Take a nap. Rest, water, nutrition, and exercise---these aren't just great for your mental health, but also actual tools we have as programmers to solve our problems. The number of times I've gone to bed and woken up having figured out my coding issues is more than I can count.
+
+Another helpful strategy is ["Rubber Duck Debugging"](https://en.wikipedia.org/wiki/Rubber_duck_debugging). In a nutshell, imagine you have to explain to a rubber duck what you're trying to accomplish. The duck has no idea how to code. The duck is just a bath toy. Make yourself patiently walk through everything, line by line, in as simple a fashion as you can manage. Often, this slow-down approach works wonders.
+
+Finally, if you've got a piece of code that is 'broken', remember that it's **not broken**. The computer will do **exactly** what you told it to do, every time. Computers are very good at following directions. They are not very good at reading minds. Instead of asking "Why is the computer not doing what I want?", ask "Why is the computer doing what it is doing?" By addressing what is *actually* happening in your code, you'll often spot bugs that you didn't see before.
+
+
+## PART 2: R is broken! Help!
+
+Sometimes, you just don't know what's going on. 
+
+1. Start from a clean slate.
+  + The classic first step: turn it off and back on again. Quit out RStudio and reopen it.
+  + The command `rm(list=ls())` will remove all the variables from your environment. Oftentimes, you’ve got old variables cluttering up the namespace (environment).
+  + Make sure you’re referring to the right variable names, and that you’re not using the same name to hold different values. 
+
+2.	Nothing’s happening!
+  + Are you assigning your output `<-` to a variable?
+  + Are you rewriting your output & not doing anything with it?
+  + Do you have a `return` statement at the end of your function?
+  
+  3.	I’m getting `+` signs in the console, help!
+  + CTRL+C to exit
+  + Check your SYNTAX. The `+` sign means that R thinks you’re not done typing.
+
+
+## PART 3: I Keep Getting This Error...
+1.	<span style="color:red">"Unexpected Symbol"</span> error, a.k.a.: CHECK YOUR SYNTAX
+  + Do all of your ( { [ have a matching ] } )? Are they nested in the right order?
+  + Do all of your function parameters have commas in between?
+  + Are your loops, functions, and conditional statements formatted correctly?
+  + If you’re copying and pasting from the lab, make sure separate functions are on their own line.
+  
+2.	<span style="color:red">"Arguments imply differing number of rows"</span> or <span style="color:red">"Data length is not a sub-multiple or multiple of the number of rows"</span>
+  + Data frame: Each column needs to have the same number of rows, or needs to be able to be repeated to fit the number of rows.
+  + Matrix: (Number of rows * number of columns) should equal the number of items you’re putting in the matrix, or the items should be able to be repeated to fit the (number of rows * number of columns)
+  
+
+## PART 4: I Don't Know Why This Isn't Working
+1.	`for` loop issues:
+  + Type `i=1` into your console. Now you can run through each line of your loop step-by-step in order to find out where everything is going wrong. You should be doing this when writing the loop in the first place; ALWAYS make sure that things are working for one item, THEN run your loop.
+  + Make sure you’re saving your output from each iteration into a variable defined outside the loop.
+  + If using nested loops, make sure you’re using the right iterator—don’t get `i` and `ii` confused!
+
+2.	`function` issues:
+  + Pre-define some of the parameters your function will be taking. Then, run it step by step to find where it’s going wrong. 
+  + Make sure you’re not referring to any outside variables in your functions. Functions work on a local namespace (set of variables), so any variable you reference within should either be a parameter passed to the function, or a variable defined inside it.
+  + Make sure you’re returning something from the function.
+  + Make sure you’re saving the function results to a variable.
+
+***
+And now we're done! You should now be familiar with basic debugging techniques and resources.
+
+This is our last module! Hope you've enjoyed. If you have any questions about the content discussed here, please email me at mes114@duke.edu. See you in class!

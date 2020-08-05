@@ -1,6 +1,7 @@
 ---
-title: "Just the Basics"
-author: "Margaret Swift"
+title: "Introduction to R"
+subtitle: "Module 02: Just the Basics"
+author: "Margaret Swift mes114@duke.edu"
 date: "04 Aug 2020"
 
 output:
@@ -8,7 +9,7 @@ output:
     theme: leonids
     toc: true
 ---
-________________________________________________________________________________
+***
 
 
 The focus of this module is to introduce basic programming concepts like 
@@ -16,7 +17,12 @@ variables and lists and conditional formatting. If these things are familiar
 to you, you can just have a skim to learn R's particular syntax. If this is 
 all sounding like a foreign language, then read on!
 
-Programming terms introduced in this section: **list, syntax**.
+**Programming terms introduced:** 
+
+**Shortcuts introduced:**
+*For Mac users, substitute CMD for CTRL.*
+
+Follow the prompts labeled <span style="color:orange">**Try This**</span> to start exploring R on your own.
 
 ## PART 1: Variables
 
@@ -30,7 +36,7 @@ Programming terms introduced in this section: **list, syntax**.
 ## PART 4: Ifs, Ands, Or Else!
 
 
-________________________________________________________________________________
+***
 And now we're done! You should now be familiar with ...
 
-When you're ready, move on to the next: "Okay, But What About Data?", in a file called "03_OkayButWhatAboutData".
+When you're ready, move on to the next: "Okay, But What About Data?", in a file called "03_OkayButWhatAboutData.html".
