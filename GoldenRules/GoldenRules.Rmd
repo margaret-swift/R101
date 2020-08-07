@@ -1,5 +1,5 @@
 ---
-title: "Maggie’s Golden Rules of (R) Programming"
+title: "Maggie’s Golden Rules"
 subtitle: "A supplement to the Introduction to R Series"
 author: "Margaret Swift mes114@duke.edu"
 date: "04 Aug 2020"
@@ -8,6 +8,7 @@ output:
     theme: leonids
     highlight: vignette
     toc: true
+  variant: markdown_strict+line_blocks
 ---
 
 ```{r setup, include=FALSE}
@@ -17,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Introduction
 Learning to program is an ever-evolving process. I am always discovering more efficient methods or new ways of processing data. Here, I present you with a list of my 'golden rules' for programming. These are things that I have learned over the years that have made coding much less stressful for me; I hope they will do the same for you.
 
-This vignette is intended as a supplement while learning to code, or having already mastered the basics. I don't explain concepts like `for` loops or conditionals here; you'll have to go to my **Introduction to R** series or other resources for that kind of information.
+This vignette is intended as a supplement while learning to code, or having already mastered the basics. I don't explain concepts like `for` loops or conditionals here; you'll have to go to my **[Introduction to R](https://rpubs.com/margaret-swift/intro-to-r-01-orientation)** series or other resources for that kind of information.
 
 If any of you are interested in common programming practices or history, here are a few links explaining coding lingo you'll see online:  
 
@@ -30,18 +31,15 @@ If any of you are interested in common programming practices or history, here ar
 
 I cannot stress this one enough. *Please* don’t just dump your files onto your desktop or into the downloads folder. Folders and subfolders dedicated to a single use will be easier to manage and keep you less stressed. Here’s an example of how I’d structure my folders for the semester:
 
-- Spring2020 
-  + STA532
-  + ENV710
-  - ENV89S
-    + Readings
-    + ClimateProject
-    - FinalProject
-        + README.txt
-        + data
-        + scripts
-        + plots
-        + presentations
+| - 2020Fall
+|      + STA532
+|       - ENV710
+|          + Lab1
+|          + Lab2
+|           - Lab3
+|                Lab3.pdf
+|                Lab3.Rmd
+
 
 If you *really* want to be organized, you can append numbers ('00_Readings', '01_ClimateProject', etc.) to the front of your file names to sort them as you wish. Otherwise, your operating system will probably default to alphabetical order.
 
@@ -102,9 +100,8 @@ Here's an example of how I usually structure my files. You don't have to follow 
 
 ```{r, eval=FALSE}
 # ExampleScript.R
-# Created 12/11/19
-# Author: Margaret Swift
-# margaret.swift@duke.edu
+# Created: 04 Aug 2020
+# Author:  Margaret Swift [mes114@duke.edu]
 
 # This script is just an example of how to structure your code; you can (and 
 # should) come up with your own way of doing things. 
@@ -114,6 +111,7 @@ Here's an example of how I usually structure my files. You don't have to follow 
 ###############################################################################
 
 rm(list=ls()) #clear all variables in environment for a fresh start
+pacman::p_load('ggplot2') #pacman installs packages you may not already have.
 dir <- dirname(rstudioapi::getSourceEditorContext()$path) #get current folder
 setwd(dir) #set working directory to current folder
 
@@ -125,8 +123,8 @@ setwd(dir) #set working directory to current folder
 # in R, but it is a good habit to get into.
 special_numbers <- c(1, 2, 5)
 for ( number in 1:10 ) {
-  if ( number in special_numbers ) {  
-    print('special!') 
+  if ( number %in% special_numbers ) {  
+    print(paste(number, 'is special!')) 
   }
 }
 
@@ -223,4 +221,18 @@ plot.vecs.func(c(1, 2, 3), c(5, 6))
 
 
 ## Google is your friend
-Google is your friend. When in doubt, copy and paste that error into Google. Sites like https://www.stackoverflow.com are great for crowd-sourcing issues you're having; often, someone else has already asked your question.
+For errors not covered here, my best advice is to **just Google it**. Google is your friend! Google has all the answers! There's a website called [Stack Overflow](https://stackoverflow.com) where lots of people post questions and crowd-source answers; it's likely that someone else has already asked this question. If you're into Reddit, the subreddit [r/Rlanguage](https://reddit.com/r/RLanguage) is also a good source for community-based programming help. Or, email me at mes114@duke.edu if you're still stuck, attaching (1) your code, (2) the text of the error that you received, and (3) a list of steps you've already tried to fix the problem.
+
+## Frustration is the path to the dark side
+
+> "Frustration is the path to the dark side. Frustration leads to anger. Anger leads to hate. Hate leads to bad code and low self-esteem." --- Yoda, probably.
+
+Coding can be really fun, but it can be really, really frustrating sometimes. If you find yourself getting angry or otherwise emotional, just stop. Take a deep breath. Close your laptop and take a walk outside. Eat something. Drink something. Take a nap. Rest, water, nutrition, and exercise---these aren't just great for your mental health, but also actual tools we have as programmers to solve our problems. The number of times I've gone to bed and woken up having figured out my coding issues is more than I can count.
+
+Another helpful strategy is ["Rubber Duck Debugging"](https://en.wikipedia.org/wiki/Rubber_duck_debugging). In a nutshell, imagine you have to explain to a rubber duck what you're trying to accomplish. The duck has no idea how to code. The duck is just a bath toy. Make yourself patiently walk through everything, line by line, in as simple a fashion as you can manage. Often, this slow-down approach works wonders.
+
+Finally, if you've got a piece of code that is 'broken', remember that it's **not broken**. The computer will do **exactly** what you told it to do, every time. Computers are very good at following directions. They are not very good at reading minds. Instead of asking "Why is the computer not doing what I want?", ask "Why is the computer doing what it is doing?" By addressing what is *actually* happening in your code, you'll often spot bugs that you didn't see before.
+
+***
+
+Thanks for reading! I hope this list has helped you out. If you have any comments, questions, or suggestions, please send them to me at mes114@duke.edu.

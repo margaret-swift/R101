@@ -15,15 +15,15 @@
 
 <meta name="date" content="2020-08-04" />
 
-<title>Maggie’s Golden Rules of (R) Programming</title>
+<title>Maggie’s Golden Rules</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -33,14 +33,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -49,9 +51,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -139,7 +141,7 @@ code span.er { color: #a61717; background-color: #e3d2d2; }
 <div class="col s12 m3">
 <div class="table cover">
 <div class="cover-card table-cell table-middle">
-<span class="author_name">Maggie’s Golden Rules of (R) Programming</span>
+<span class="author_name">Maggie’s Golden Rules</span>
 <span class="author_job">A supplement to the Introduction to R Series</span>
 <span class="author_bio mbm">Margaret Swift <a href="mailto:mes114@duke.edu" class="email">mes114@duke.edu</a></span>
 <span class="author_bio mbm">04 Aug 2020</span>
@@ -161,6 +163,7 @@ code span.er { color: #a61717; background-color: #e3d2d2; }
 <li><a href="#dry">DRY — Don’t Repeat Yourself</a></li>
 <li><a href="#idiot-proof-your-code">Idiot-proof your code</a></li>
 <li><a href="#google-is-your-friend">Google is your friend</a></li>
+<li><a href="#frustration-is-the-path-to-the-dark-side">Frustration is the path to the dark side</a></li>
 </ul>
 </div>
 
@@ -169,10 +172,10 @@ code span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>Learning to program is an ever-evolving process. I am always discovering more efficient methods or new ways of processing data. Here, I present you with a list of my ‘golden rules’ for programming. These are things that I have learned over the years that have made coding much less stressful for me; I hope they will do the same for you.</p>
-<p>This vignette is intended as a supplement while learning to code, or having already mastered the basics. I don’t explain concepts like <code>for</code> loops or conditionals here; you’ll have to go to my <strong>Introduction to R</strong> series or other resources for that kind of information.</p>
+<p>This vignette is intended as a supplement while learning to code, or having already mastered the basics. I don’t explain concepts like <code>for</code> loops or conditionals here; you’ll have to go to my <strong><a href="https://rpubs.com/margaret-swift/intro-to-r-01-orientation">Introduction to R</a></strong> series or other resources for that kind of information.</p>
 <p>If any of you are interested in common programming practices or history, here are a few links explaining coding lingo you’ll see online:</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Foobar">foobar</a>: <code>foo</code> and <code>bar</code> are often used as placeholder names when generally discussing a programming question, i.e. <code>addFunc &lt;- function(foo,bar) { return(foo+bar) }</code><br />
+<li><a href="https://en.wikipedia.org/wiki/Foobar">foobar</a>: <code>foo</code> and <code>bar</code> are often used as placeholder names when generally discussing a programming question, i.e. <code>addFunc &lt;- function(foo,bar) { return(foo+bar) }</code><br />
 </li>
 <li><a href="https://en.wikipedia.org/wiki/%22Hello,_World!%22_program">“Hello World”</a>: Standard programming placeholder phrase.</li>
 <li><a href="https://www.tutorialsteacher.com/python/python-variables">myVar</a>: You’ll see this a lot. <code>myVar</code>, <code>myfunc</code>, <code>myval</code>, etc. It’s just a helpful way to generalize your code when asking a question online or explaining a concept.</li>
@@ -182,26 +185,14 @@ code span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="a-place-for-everything-and-everything-in-its-place." class="section level2">
 <h2>A place for everything, and everything in its place.</h2>
 <p>I cannot stress this one enough. <em>Please</em> don’t just dump your files onto your desktop or into the downloads folder. Folders and subfolders dedicated to a single use will be easier to manage and keep you less stressed. Here’s an example of how I’d structure my folders for the semester:</p>
-<ul>
-<li>Spring2020
-<ul>
-<li>STA532</li>
-<li>ENV710</li>
-<li>ENV89S
-<ul>
-<li>Readings</li>
-<li>ClimateProject</li>
-<li>FinalProject
-<ul>
-<li>README.txt</li>
-<li>data</li>
-<li>scripts</li>
-<li>plots</li>
-<li>presentations</li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+<div class="line-block">- 2020Fall<br />
+     + STA532<br />
+      - ENV710<br />
+         + Lab1<br />
+         + Lab2<br />
+          - Lab3<br />
+               Lab3.pdf<br />
+               Lab3.Rmd</div>
 <p>If you <em>really</em> want to be organized, you can append numbers (‘00_Readings’, ‘01_ClimateProject’, etc.) to the front of your file names to sort them as you wish. Otherwise, your operating system will probably default to alphabetical order.</p>
 </div>
 <div id="whats-in-a-name" class="section level2">
@@ -218,108 +209,108 @@ code span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Everyone structures their scripts differently; these are just my recommendations.</p>
 <p><strong>Clarity</strong><br />
 I usually start my code with a header providing my name and email address; the file name; date of creation; and a brief description of the file’s purpose. This is to provide (1) for other people using my code in the future, and (2) for myself, because six months from now I’m sure I won’t know what the file is for, unless I’ve written it down.</p>
-<p>The two components of readability (besides naming conventions) are whitespace and comments. Whitespace can be vertical (inter-line spacing) or horizontal (intra-line spacing i.e. <code>x &lt;- 1</code> instead of <code>x&lt;-1</code>). <code>#Comments</code> are used to add insight into a line or section’s purpose where there may be ambiguity.</p>
+<p>The two components of readability (besides naming conventions) are whitespace and comments. Whitespace can be vertical (inter-line spacing) or horizontal (intra-line spacing i.e. <code>x &lt;- 1</code> instead of <code>x&lt;-1</code>). <code>#Comments</code> are used to add insight into a line or section’s purpose where there may be ambiguity.</p>
 <p>There are many different philosophies on what constitutes ‘good’ coding; when you’re first starting out, though, comments and spacing can help everything feel much less overwhelming, and are good habits to foster. There are whole competitions out there to program tasks in as few characters or lines as possible, but that style of coding is not what you should start out doing. Much like any other skill, you’ve got to learn the rules before you can know when—and how—to break them.</p>
 <p><strong>Reusability</strong><br />
 Store everything. Let’s say you’re trying to find the probability of seeing 3 dogs at the dog park, given an average of 5. The following code will get the job done, but it’s not very reusable.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">dpois</span>(<span class="dt">x=</span><span class="dv">3</span>, <span class="dt">lambda=</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">dpois</span>(<span class="dt">x=</span><span class="dv">4</span>, <span class="dt">lambda=</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">dpois</span>(<span class="dt">x=</span><span class="dv">5</span>, <span class="dt">lambda=</span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">dpois</span>(<span class="dt">x=</span><span class="dv">3</span>, <span class="dt">lambda=</span><span class="dv">5</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">dpois</span>(<span class="dt">x=</span><span class="dv">4</span>, <span class="dt">lambda=</span><span class="dv">5</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">dpois</span>(<span class="dt">x=</span><span class="dv">5</span>, <span class="dt">lambda=</span><span class="dv">5</span>)</span></code></pre></div>
 <p>In this instance, 3, 4, and 5 are ‘magic numbers’ – inputted into a function directly without an associated variable. They haven’t been stored anywhere, and so if you wanted to find the probability of seeing 3, 4, and 5 dogs separately, you’d have to write out the whole line three times. Writing things out again and again can lead to errors when copying and pasting (see <a href="#dry">DRY</a>), so it’s best practice to save all values as variables instead:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">num_dogs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">avg_dogs &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="cf">for</span> (number <span class="cf">in</span> num_dogs) {</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="kw">dpois</span>(<span class="dt">x=</span>number, <span class="dt">lambda=</span>avg_dogs)</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>num_dogs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>avg_dogs &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="cf">for</span> (number <span class="cf">in</span> num_dogs) {</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="kw">dpois</span>(<span class="dt">x=</span>number, <span class="dt">lambda=</span>avg_dogs)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>}</span></code></pre></div>
 <p>Even better – you can store this code as a function for later use. This particular example isn’t great, but I often use functions to do things like cleaning strings or processing data:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">fixName &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="kw">tolower</span>(<span class="kw">as.character</span>(n))</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>, n)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">  n &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;[[:punct:]]&quot;</span>, <span class="st">&quot;&quot;</span>, n)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="kw">return</span>(n)</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">}</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">fixName</span>(<span class="st">'hEllo World!!!'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>fixName &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  n &lt;-<span class="st"> </span><span class="kw">tolower</span>(<span class="kw">as.character</span>(n))</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  n &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>, n)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  n &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;[[:punct:]]&quot;</span>, <span class="st">&quot;&quot;</span>, n)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="kw">return</span>(n)</span>
+<span id="cb3-6"><a href="#cb3-6"></a>}</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">fixName</span>(<span class="st">&#39;hEllo World!!!&#39;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;helloworld&quot;</code></pre>
 <p><strong>Example</strong></p>
 <p>Here’s an example of how I usually structure my files. You don’t have to follow this method exactly, but having a similar structure across scripts can be a helpful tool to make your programming more uniform and easy to read:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># ExampleScript.R</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co"># Created 12/11/19</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># Author: Margaret Swift</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># margaret.swift@duke.edu</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># This script is just an example of how to structure your code; you can (and </span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co"># should) come up with your own way of doing things. </span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">###############################################################################</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co"># Set up workspace</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">###############################################################################</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>()) <span class="co">#clear all variables in environment for a fresh start</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14">dir &lt;-<span class="st"> </span><span class="kw">dirname</span>(rstudioapi<span class="op">::</span><span class="kw">getSourceEditorContext</span>()<span class="op">$</span>path) <span class="co">#get current folder</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="kw">setwd</span>(dir) <span class="co">#set working directory to current folder</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">###############################################################################</span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co"># Do something</span></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">###############################################################################</span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co"># Indenting inside curly braсes helps with file readability. It's not required</span></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co"># in R, but it is a good habit to get into.</span></a>
-<a class="sourceLine" id="cb5-23" data-line-number="23">special_numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="cf">for</span> ( number <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span> ) {</a>
-<a class="sourceLine" id="cb5-25" data-line-number="25">  <span class="cf">if</span> ( number <span class="cf">in</span> special_numbers ) {  </a>
-<a class="sourceLine" id="cb5-26" data-line-number="26">    <span class="kw">print</span>(<span class="st">'special!'</span>) </a>
-<a class="sourceLine" id="cb5-27" data-line-number="27">  }</a>
-<a class="sourceLine" id="cb5-28" data-line-number="28">}</a>
-<a class="sourceLine" id="cb5-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb5-30" data-line-number="30"><span class="co">###############################################################################</span></a>
-<a class="sourceLine" id="cb5-31" data-line-number="31"><span class="co"># Save results at the end</span></a>
-<a class="sourceLine" id="cb5-32" data-line-number="32"><span class="co">###############################################################################</span></a>
-<a class="sourceLine" id="cb5-33" data-line-number="33"></a>
-<a class="sourceLine" id="cb5-34" data-line-number="34">filename &lt;-<span class="st"> &quot;results.txt&quot;</span></a>
-<a class="sourceLine" id="cb5-35" data-line-number="35"><span class="kw">write.table</span>(<span class="st">'hello world'</span>, filename)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># ExampleScript.R</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># Created: 04 Aug 2020</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># Author:  Margaret Swift [mes114@duke.edu]</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># This script is just an example of how to structure your code; you can (and </span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># should) come up with your own way of doing things. </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">###############################################################################</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co"># Set up workspace</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">###############################################################################</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>()) <span class="co">#clear all variables in environment for a fresh start</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>pacman<span class="op">::</span><span class="kw">p_load</span>(<span class="st">&#39;ggplot2&#39;</span>) <span class="co">#pacman installs packages you may not already have.</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>dir &lt;-<span class="st"> </span><span class="kw">dirname</span>(rstudioapi<span class="op">::</span><span class="kw">getSourceEditorContext</span>()<span class="op">$</span>path) <span class="co">#get current folder</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="kw">setwd</span>(dir) <span class="co">#set working directory to current folder</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">###############################################################################</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co"># Do something</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co">###############################################################################</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="co"># Indenting inside curly braсes helps with file readability. It&#39;s not required</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co"># in R, but it is a good habit to get into.</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>special_numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="cf">for</span> ( number <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span> ) {</span>
+<span id="cb5-25"><a href="#cb5-25"></a>  <span class="cf">if</span> ( number <span class="op">%in%</span><span class="st"> </span>special_numbers ) {  </span>
+<span id="cb5-26"><a href="#cb5-26"></a>    <span class="kw">print</span>(<span class="kw">paste</span>(number, <span class="st">&#39;is special!&#39;</span>)) </span>
+<span id="cb5-27"><a href="#cb5-27"></a>  }</span>
+<span id="cb5-28"><a href="#cb5-28"></a>}</span>
+<span id="cb5-29"><a href="#cb5-29"></a></span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="co">###############################################################################</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a><span class="co"># Save results at the end</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="co">###############################################################################</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a></span>
+<span id="cb5-34"><a href="#cb5-34"></a>filename &lt;-<span class="st"> &quot;results.txt&quot;</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a><span class="kw">write.table</span>(<span class="st">&#39;hello world&#39;</span>, filename)</span></code></pre></div>
 </div>
 <div id="inside-out-and-broken-down" class="section level2">
 <h2>Inside out and broken down</h2>
 <p>Let’s return to our function, <code>fixName</code>, introduced <a href="#fixname">earlier</a>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">fixName &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="kw">tolower</span>(<span class="kw">as.character</span>(n))</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>, n)</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">  n &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;[[:punct:]]&quot;</span>, <span class="st">&quot;&quot;</span>, n)</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">  <span class="kw">return</span>(n)</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>fixName &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  n &lt;-<span class="st"> </span><span class="kw">tolower</span>(<span class="kw">as.character</span>(n))</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  n &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>, n)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  n &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;[[:punct:]]&quot;</span>, <span class="st">&quot;&quot;</span>, n)</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="kw">return</span>(n)</span>
+<span id="cb6-6"><a href="#cb6-6"></a>}</span></code></pre></div>
 <p>We could have written the whole thing in one line:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">fixName &lt;-<span class="st"> </span><span class="cf">function</span>(n) { <span class="kw">return</span>( <span class="kw">gsub</span>(<span class="st">&quot;[[:punct:]]&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="kw">gsub</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="kw">tolower</span>(<span class="kw">as.character</span>(n)) ) ) ) }</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>fixName &lt;-<span class="st"> </span><span class="cf">function</span>(n) { <span class="kw">return</span>( <span class="kw">gsub</span>(<span class="st">&quot;[[:punct:]]&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="kw">gsub</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="kw">tolower</span>(<span class="kw">as.character</span>(n)) ) ) ) }</span></code></pre></div>
 <p>This second version is more condensed, but how readable is it? Not very. It’s better to break down these long phrases into easily manageable chunks. This makes your code easier to read and, most importantly, makes your code easier to debug. If something goes wrong in one line, you have no idea where the error is from. But, if you’ve broken up your function into separate steps, debugging becomes much simpler.</p>
 <p>Let’s try another example. I want to capture all values in a data frame that are larger than the mean. Instead of writing the whole command in one go, it’s better to start from the inside and work outward:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">foo=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">14</span>,<span class="dv">0</span>,<span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">mean</span>( data<span class="op">$</span>foo ) <span class="co">#find the mean </span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">data<span class="op">$</span>foo <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>( data<span class="op">$</span>foo ) <span class="co">#find which data points are larger</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">data[ data<span class="op">$</span>foo <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>( data<span class="op">$</span>foo ), ] <span class="co">#grab those data points</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">foo=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">14</span>,<span class="dv">0</span>,<span class="dv">5</span>))</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">mean</span>( data<span class="op">$</span>foo ) <span class="co">#find the mean </span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>data<span class="op">$</span>foo <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>( data<span class="op">$</span>foo ) <span class="co">#find which data points are larger</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>data[ data<span class="op">$</span>foo <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>( data<span class="op">$</span>foo ), ] <span class="co">#grab those data points</span></span></code></pre></div>
 <p>Better yet, use what we learned <a href="#fixName">before</a> and store some of these values in variables:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">mu &lt;-<span class="st"> </span><span class="kw">mean</span>( data<span class="op">$</span>foo )</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">inx &lt;-<span class="st"> </span>data<span class="op">$</span>foo <span class="op">&gt;</span><span class="st"> </span>mu</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">data[ inx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>mu &lt;-<span class="st"> </span><span class="kw">mean</span>( data<span class="op">$</span>foo )</span>
+<span id="cb9-2"><a href="#cb9-2"></a>inx &lt;-<span class="st"> </span>data<span class="op">$</span>foo <span class="op">&gt;</span><span class="st"> </span>mu</span>
+<span id="cb9-3"><a href="#cb9-3"></a>data[ inx, ]</span></code></pre></div>
 <p>This is really important for functions and loops. Start with the simple case and work your way out to the wrapper when writing and troubleshooting. Then, instead of running your loop all at once and having it break, set <code>i=1</code> on your own and run through the loop line-by-line to see where the error is.</p>
 </div>
 <div id="simple-is-best" class="section level2">
 <h2>Simple is best</h2>
 <p>A lot of times, we’re tempted to use loops because they’re easy or they’re what we’re used to. But if something can be done without a loop, it should be. This is because loops take up a lot of time and memory, especially when running over a huge dataset. So, for example, if I wanted to create a vector <code>p</code> filled with percentiles, I could use <code>for</code> loops, or I could use vector manipulation (ie <code>1:100</code>). Run the following code to see for yourself:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="dv">500000</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co"># for loop way:</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">p1 &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length=</span>n)</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">end1 &lt;-<span class="st"> </span><span class="kw">system.time</span>(</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n ) {</a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">    p1[i] &lt;-<span class="st"> </span>( i <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span> ) <span class="op">/</span><span class="st"> </span>n</a>
-<a class="sourceLine" id="cb10-8" data-line-number="8">  }</a>
-<a class="sourceLine" id="cb10-9" data-line-number="9">)[<span class="st">'elapsed'</span>]</a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co"># vector manipulation way:</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12">end2 &lt;-<span class="st"> </span><span class="kw">system.time</span>(</a>
-<a class="sourceLine" id="cb10-13" data-line-number="13">  p2 &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">:</span>n <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>) <span class="op">/</span><span class="st"> </span>n</a>
-<a class="sourceLine" id="cb10-14" data-line-number="14">)[<span class="st">'elapsed'</span>]</a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="kw">cat</span>(<span class="st">'for loop: '</span>, end1, <span class="st">'sec.</span><span class="ch">\n</span><span class="st">'</span>, <span class="st">'vector: '</span>, end2, <span class="st">'sec.'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>n &lt;-<span class="st"> </span><span class="dv">500000</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co"># for loop way:</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>p1 &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length=</span>n)</span>
+<span id="cb10-5"><a href="#cb10-5"></a>end1 &lt;-<span class="st"> </span><span class="kw">system.time</span>(</span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n ) {</span>
+<span id="cb10-7"><a href="#cb10-7"></a>    p1[i] &lt;-<span class="st"> </span>( i <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span> ) <span class="op">/</span><span class="st"> </span>n</span>
+<span id="cb10-8"><a href="#cb10-8"></a>  }</span>
+<span id="cb10-9"><a href="#cb10-9"></a>)[<span class="st">&#39;elapsed&#39;</span>]</span>
+<span id="cb10-10"><a href="#cb10-10"></a></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co"># vector manipulation way:</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>end2 &lt;-<span class="st"> </span><span class="kw">system.time</span>(</span>
+<span id="cb10-13"><a href="#cb10-13"></a>  p2 &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">:</span>n <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>) <span class="op">/</span><span class="st"> </span>n</span>
+<span id="cb10-14"><a href="#cb10-14"></a>)[<span class="st">&#39;elapsed&#39;</span>]</span>
+<span id="cb10-15"><a href="#cb10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="kw">cat</span>(<span class="st">&#39;for loop: &#39;</span>, end1, <span class="st">&#39;sec.</span><span class="ch">\n</span><span class="st">&#39;</span>, <span class="st">&#39;vector: &#39;</span>, end2, <span class="st">&#39;sec.&#39;</span>)</span></code></pre></div>
 <pre><code>## for loop:  0.049 sec.
 ##  vector:  0.004 sec.</code></pre>
 <p>As you can see, the <code>for</code> loop option is <em>much</em> slower than using ranges, despite running the same calculation. Nested loops compound this. <code>for</code> loops are useful, yes, but be careful that you know their weaknesses.</p>
@@ -327,23 +318,34 @@ Store everything. Let’s say you’re trying to find the probability of seeing 
 <div id="dry" class="section level2">
 <h2>DRY — Don’t Repeat Yourself</h2>
 <p>All this said, one of the most important rules I’ve learned is — Don’t Repeat Yourself. If you’re copying and pasting code from one place to another, you’re not being very efficient. Whenever possible, use vector manipulation, loops, or functions like <code>sapply</code> to accomplish a task multiple times without repeating yourself. Something that my dad always liked to tell me about skiing seems appropriate here–the goal of the thing is to <em>do no work</em>. Think of programming as trying to be as lazy as possible–don’t copy and paste when a better method is availab le.</p>
-<p>This also goes for creating utility files for larger projects. If you find yourself writing and re-writing a function to find a certain file, or to plot a certain graph, in every file of your project — it may be well worth it to put all of your functions into one big ‘Utilities.R’ file that is accessed by every other script, using <code>source('Utilities.R')</code>. I do this for all of my projects.</p>
+<p>This also goes for creating utility files for larger projects. If you find yourself writing and re-writing a function to find a certain file, or to plot a certain graph, in every file of your project — it may be well worth it to put all of your functions into one big ‘Utilities.R’ file that is accessed by every other script, using <code>source(&#39;Utilities.R&#39;)</code>. I do this for all of my projects.</p>
 </div>
 <div id="idiot-proof-your-code" class="section level2">
 <h2>Idiot-proof your code</h2>
 <p>When writing functions, be sure to account for user error. Don’t assume that the user (who may well be your future self!) remembered to sort the data before passing it to the function—sort it for them upon arrival. Don’t assume that vector 1 and vector 2 will be the same length—compare the two and print an error with <code>warning()</code> if they don’t match:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">plot.vecs.func &lt;-<span class="st"> </span><span class="cf">function</span>( x, y ) {</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">  <span class="cf">if</span> ( <span class="kw">length</span> (x) <span class="op">!=</span><span class="st"> </span><span class="kw">length</span>(y) ) {</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">    <span class="kw">warning</span>(<span class="st">'WARNING: Samples have different length!'</span>)</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">  } <span class="cf">else</span> { <span class="kw">plot</span>(x, y) }</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="kw">plot.vecs.func</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>plot.vecs.func &lt;-<span class="st"> </span><span class="cf">function</span>( x, y ) {</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="cf">if</span> ( <span class="kw">length</span> (x) <span class="op">!=</span><span class="st"> </span><span class="kw">length</span>(y) ) {</span>
+<span id="cb12-3"><a href="#cb12-3"></a>    <span class="kw">warning</span>(<span class="st">&#39;WARNING: Samples have different length!&#39;</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  } <span class="cf">else</span> { <span class="kw">plot</span>(x, y) }</span>
+<span id="cb12-5"><a href="#cb12-5"></a>}</span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="kw">plot.vecs.func</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>))</span></code></pre></div>
 <pre><code>## Warning in plot.vecs.func(c(1, 2, 3), c(5, 6)): WARNING: Samples have different
 ## length!</code></pre>
 </div>
 <div id="google-is-your-friend" class="section level2">
 <h2>Google is your friend</h2>
-<p>Google is your friend. When in doubt, copy and paste that error into Google. Sites like <a href="https://www.stackoverflow.com" class="uri">https://www.stackoverflow.com</a> are great for crowd-sourcing issues you’re having; often, someone else has already asked your question.</p>
+<p>For errors not covered here, my best advice is to <strong>just Google it</strong>. Google is your friend! Google has all the answers! There’s a website called <a href="https://stackoverflow.com">Stack Overflow</a> where lots of people post questions and crowd-source answers; it’s likely that someone else has already asked this question. If you’re into Reddit, the subreddit <a href="https://reddit.com/r/RLanguage">r/Rlanguage</a> is also a good source for community-based programming help. Or, email me at <a href="mailto:mes114@duke.edu" class="email">mes114@duke.edu</a> if you’re still stuck, attaching (1) your code, (2) the text of the error that you received, and (3) a list of steps you’ve already tried to fix the problem.</p>
+</div>
+<div id="frustration-is-the-path-to-the-dark-side" class="section level2">
+<h2>Frustration is the path to the dark side</h2>
+<blockquote>
+<p>“Frustration is the path to the dark side. Frustration leads to anger. Anger leads to hate. Hate leads to bad code and low self-esteem.” — Yoda, probably.</p>
+</blockquote>
+<p>Coding can be really fun, but it can be really, really frustrating sometimes. If you find yourself getting angry or otherwise emotional, just stop. Take a deep breath. Close your laptop and take a walk outside. Eat something. Drink something. Take a nap. Rest, water, nutrition, and exercise—these aren’t just great for your mental health, but also actual tools we have as programmers to solve our problems. The number of times I’ve gone to bed and woken up having figured out my coding issues is more than I can count.</p>
+<p>Another helpful strategy is <a href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">“Rubber Duck Debugging”</a>. In a nutshell, imagine you have to explain to a rubber duck what you’re trying to accomplish. The duck has no idea how to code. The duck is just a bath toy. Make yourself patiently walk through everything, line by line, in as simple a fashion as you can manage. Often, this slow-down approach works wonders.</p>
+<p>Finally, if you’ve got a piece of code that is ‘broken’, remember that it’s <strong>not broken</strong>. The computer will do <strong>exactly</strong> what you told it to do, every time. Computers are very good at following directions. They are not very good at reading minds. Instead of asking “Why is the computer not doing what I want?”, ask “Why is the computer doing what it is doing?” By addressing what is <em>actually</em> happening in your code, you’ll often spot bugs that you didn’t see before.</p>
+<hr />
+<p>Thanks for reading! I hope this list has helped you out. If you have any comments, questions, or suggestions, please send them to me at <a href="mailto:mes114@duke.edu" class="email">mes114@duke.edu</a>.</p>
 </div>
 </article>
 </div>

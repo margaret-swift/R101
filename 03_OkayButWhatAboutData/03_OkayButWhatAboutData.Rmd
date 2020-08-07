@@ -9,6 +9,8 @@ output:
     theme: leonids
     toc: true
 ---
+<base target="_blank"/>
+
 ***
 
 The focus of this module is to actually open up some of your data files! I 
@@ -35,4 +37,4 @@ Follow the prompts labeled <span style="color:orange">**Try This**</span> to sta
 ***
 And now we're done! You should now be familiar with ...
 
-When you're ready, move on to the next: "Make It Pretty!", in a file called "04_MakeItPretty.html".
+When you're ready, move on to the next module: [Make It Pretty!](https://rpubs.com/margaret-swift/intro-to-r-04-pretty).

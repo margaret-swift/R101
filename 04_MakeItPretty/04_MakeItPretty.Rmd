@@ -10,6 +10,8 @@ output:
     toc: true
   variant: markdown_strict+line_blocks
 ---
+<base target="_blank"/>
+
 ***
 
 The focus of this module is to make things pretty. We'll cover how to make
@@ -100,5 +102,5 @@ write.table('hello world', filename)
 ***
 And now we're done! You should now be familiar with proper file structures, ggplot, and RMarkdown.
 
-When you're ready, move on to the next: "Help, Something's Broken!", in a file called "05_HelpSomethingsBroken.html".
+When you're ready, move on to the next module: [Help, Something's Broken!](https://rpubs.com/margaret-swift/intro-to-r-05-debugging).
 

@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R"
 subtitle: "Module 05: Help, Something's Broken!"
-author: "Margaret Swift mes114@duke.edu"
+author: "Margaret Swift \nmes114@duke.edu"
 date: "04 Aug 2020"
 
 output:
@@ -9,6 +9,8 @@ output:
     theme: leonids
     toc: true
 ---
+<base target="_blank"/>
+
 ***
 
 The focus of this module is to help you with basic troubleshooting, or **debugging** as we call it in program-speak. 

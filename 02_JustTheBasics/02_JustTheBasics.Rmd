@@ -9,34 +9,229 @@ output:
     theme: leonids
     toc: true
 ---
-***
+<base target="_blank"/>
 
+***
 
 The focus of this module is to introduce basic programming concepts like 
 variables and lists and conditional formatting. If these things are familiar
-to you, you can just have a skim to learn R's particular syntax. If this is 
-all sounding like a foreign language, then read on!
+to you, you can just have a skim to learn R's particular **syntax**, or way of writing commands. If this is all sounding like a foreign language, then read on!
 
-**Programming terms introduced:** 
+**Programming terms introduced:** arithmetic operator, Boolean, class, comparison operator, condition, data frame, inclusive OR, index, initialize, integer division, iteration, length, list, logical operator, loop, modulus, numeric, one-based indexing, string, syntax, vector, zero-based indexing.
 
-**Shortcuts introduced:**
-*For Mac users, substitute CMD for CTRL.*
+**Shortcuts introduced:** NONE.
 
 Follow the prompts labeled <span style="color:orange">**Try This**</span> to start exploring R on your own.
 
-## PART 1: Variables
+## PART 1: Variables and Classes
+
+We already covered these a bit in the last module. Remember `a <- 3`? `a` here is a variable that holds the value of `3`. We can use variables to hold all sorts of things, though. `myName <- 'Maggie'` holds the string "Maggie". A **string** is just a series of characters, denoted by a single ' or double " quotation mark. Other data types (called **classes**) include [**Booleans**](https://en.wikipedia.org/wiki/George_Boole), which are special logical values `TRUE` and `FALSE` covered in Part 2; **numerics** like `3` or `4.56` or `pi` or `-1e8` (R's way of writing $-1 \times 10^8$); and **vectors**, sometimes called **lists**, which are (you guessed it), lists of numbers, characters, Booleans, or even other lists. There are more data classes in R, but these are the main ones you'll be working with.
+
+<span style="color:orange">**Try This:**</span> Once a variable has been defined, we can then use it in calculations. Plug the following into your script and walk through it step by step:
+
+```{r, eval=FALSE}
+a <- 3
+a
+a + 4
+a
+a <- a + 4
+a
+```
+
+How does the value of `a` change as you step through this sequence? What is the difference between line 3 and line 5? Keep an eye on your environment tab---when does `a` change its value, and why?
 
 
-## PART 2: Lists
+## PART 2: Logic and Operators
+Logic is the backbone of programming. By **logic**, programmers generally mean a statement or set of statements that uses or produces a value of `TRUE` or `FALSE`. These are called **Booleans** (said like 'aliens' but with 'bool' instead of 'al'). We get these Boolean values by comparing two or more values. For example, `3 > 5` will return `FALSE` because 3 is not greater than 5. 
+
+### Comparison Operators
+The six main **comparison operators** in R are:
+
+* `>` (greater than) 
+* `<` (less than) 
+* `>=` (greater than or equal to) 
+* `<=` (less than or equal to) 
+* `==` (equal to) 
+* `!=` (not equal to). 
+
+Notice that "equal to" is `==`, not `=`. This is common in programming languages because a single `=`, as mentioned in the previous module, is used as the **assignment operator**, just like `<-`. Be careful not to mix the two up!
+
+<span style="color:orange">**Try This:**</span> In your script for this module, write out several comparisons like `3 > 5` using the comparison operators listed above.
+
+<span style="color:orange">**Try This:**</span> 
+`TRUE` and `FALSE` are the Boolean values in R; things like `true` or `False` may work in other languages, but not in R. You can also use `T` and `F` for short. Type `T == TRUE` to convince yourself. What happens when you type `0 == FALSE` or `1 == F` or `TRUE == 16`? It's helpful sometimes to know that R equates `0 == FALSE == F` and `1 == TRUE == T`.
 
 
-## PART 3: Logic
+### Logical Operators
+Beyond comparison operators, we also have a few **logical operators**:
+
+* `&` (AND) 
+* `|` (OR) *(inclusive)*
+* `!` (NOT)
+
+AND (`&`) and OR (`|`) work to compare two Boolean values. `TRUE & FALSE` will return `FALSE` because with AND, both values have to be `TRUE`. `TRUE | FALSE`, however, will return `TRUE` because with OR, only one item in the set has to be `TRUE`. *(this is because the OR we are using is called 'inclusive or'; 'exclusive or' would return `FALSE` if BOTH values are `TRUE`)*
+
+NOT is relatively straightforward; it just flips whatever is after it. `!TRUE` will return `FALSE`, and `!FALSE` will return `TRUE`.
+
+<span style="color:orange">**Try This:**</span> Compare `&` and `|`. When do they each return `TRUE`, and when do they return `FALSE`?
+
+<span style="color:orange">**Try This:**</span> You can use AND, OR, and NOT with things other than Booleans; for example, `5<3 & 5>2` will return `FALSE`. Use parentheses to create longer logical statements (e.g. `(TRUE & FALSE) | (5<7 & 3!=4)`, and try to guess what the outcome will be before you press ENTER.
+
+<span style="color:orange">**Try This:**</span> Now combine your new knowledge of variables with Booleans. Try things like `a <- TRUE` and `b <- 5 > 7`. What does `!a` return? Use AND, OR, and NOT to create logical statements to compare `a` and `b`.
+
+<span style="color:orange">**Try This:**</span> What happens if you use logical operators with strings? Try `'abc' < '123'` and `'abc' == 'abc'`.
+
+### Arithmetic Operators
+You already can guess most of these from math class, but here are the main **arithmetic operators** (said like "air-ith-MEH-tic"): 
+
+* `+` (addition)
+* `-` (subtraction)
+* `/` (division)
+* `%%` (modulus)
+* `%/%` (integer division)
+* `^` or `**` (exponentiation)
+
+**Integer division** and **modulus** may be new terms for you. Remember back in third grade, when learning to divide for the first time? You might have learned something like "10 divided by 6 is 1 remainder 4", meaning that 6 goes into 10 only once, with a remainder leftover of 4. These operators work just like your third-grade division: `%/%` returns the full integer (1 in this case) `%%` returns the remainder (4).
+
+<span style="color:orange">**Try This:**</span> Use `%%` and `%/%` with the same values, and try to guess what the answer will be before pressing ENTER.
+
+For a comprehensive reference list of operators in R, see [this webpage](https://www.statmethods.net/management/operators.html).
 
 
-## PART 4: Ifs, Ands, Or Else!
+## PART 3: Lists
 
+Right, so until now we have been using only singular values for each variable. Now, I'll introduce you to **lists**. There are many ways to make lists in R, but the one I'll teach you today is called `c()`. 'c' stands for 'concatenate', and is a very quick way of creating lists in R. For example, the list `c(1,2,3)` is a list of **length** 3 which holds the values 1, 2, and 3. R will return it to you looking like this: `[1] 1 2 3`. 
+
+Another quick way to make lists of numbers is using a `:` colon. `1:10` will return a list of the numbers from 1 to 10. 
+
+You can combine logical operators with lists, as long as both lists are the same length. `c(1,2,3) > c(0, 14, 3)` looks at each value in the first list and compares it with its pair in the second list, returning a vector of Booleans.
+
+Another logical operator that I didn't introduce before is IN, written like `%in%`. IN tells us if a value is contained in a list. `3 %in% 1:10` will return `TRUE` because the value 3 is indeed inside the range 1:10. `c(1,3) %in% 1:10` will return two `TRUE`s, one for each value in the first list.
+
+The last thing to know about lists is something called **indexing**. We use indexing when we want to grab a certain value or set of values from a list. R is a **one-based indexing** language, meaning that the first value in the list has an index of 1. Some other languages (like Python) start with 0; these are called **zero-based indexing** systems. 
+
+If I have a list called `a <- c("A", "B", "C")`, to get the letter "C", I would type square brackets, like this: `a[3]`. C is the 3rd value in the list, and its index is 3. If I wanted to grab both B and C, I would write `a[2:3]`. For "A" and "C", I could do `a[c(1,3)]`. Indexing is a very basic, yet powerful tool for programming. 
+
+<span style="color:orange">**Try This:**</span> Remember that pesky `[1]` that shows up at the beginning of every return from R? Type `1:100` into the console. What do you see now? What do you think the numbers in brackets could mean?
+
+<span style="color:orange">**Try This:**</span> Type `a <- c(1,2,3)`. Now look at the environment. What do you think `num [1:3]` means? Type `b <- c('a', 'b', 'c', 'd', 'e')`. What does `chr [1:5]` mean?
+
+<span style="color:orange">**Try This:**</span> What happens when you combine lists with arithmetic operators? Try statements like this:
+```{r, eval=F}
+a <- c(10, 20, 30)
+b <- c(3, 6, 9)
+a + b
+```
+
+How might you get a list returned from `a` and `b` that looks like `[1] 10 20 30 3 6 9`? How would you index that list to grab just the odd values?
+
+## PART 4: Conditionals (IF and ELSE)
+
+Our last piece of basic programming skills is the IF/ELSE statement. This is called a **conditional**. For an IF statement, we do something ONLY if the **condition** (the part in parentheses `()`) is `TRUE`. For example, let's `print` the word "TRUE" if the condition is `TRUE`:
+
+```{r}
+if (TRUE) {
+  print('TRUE')
+}
+```
+```{r}
+if (FALSE) {
+  print('TRUE')
+}
+```
+Easy, but not very useful. Let's do a real-world example. Say we want a program to tell us our letter grade in a class, given our number grade. We've got a `grade` of 92%; do we have an A? First, we'll tell the computer our `grade` by creating a variable:
+
+```{r}
+grade <- 92
+```
+
+Now it knows our grade. Here's a statement that prints "you got an A!" if your grade is high enough:
+```{r}
+if (grade >= 90) {
+  print('you got an A!')
+}
+```
+
+Well that was easy! But what if we don't have an A? This is where ELSE comes into play. Let's redefine our grade to be a 77:
+
+```{r}
+grade <- 77
+if (grade >= 90) {
+  print('you got an A!')
+} else {
+  print("you did not get an A! :(")
+}
+```
+
+Well that's convenient! We can impose a condition on our grade, print one thing if it's greater than a 90, and another if it's lower. But there are more letter grades than just A and not-A, right? To handle more than one condition, we use our last tool, an IF-ELSE statement. IF-ELSE starts at the first IF and evaluates it. If the first IF is `FALSE`, the computer will move onto the next, trying again and again until it finds a `TRUE.` If there are no `TRUE`s, the computer will run the ELSE block. Here, it's easier to show you:
+
+```{r}
+grade <- 77
+if (grade >= 90) {
+  print('you got an A!')
+} else if (grade >= 80) {
+  print('you got a B!')
+} else if (grade >= 70) {
+  print('you got a C!')
+} else if (grade >= 60) {
+  print('you got a D!')
+} else {
+  print("you got an F. :(")
+}
+```
+
+<span style="color:orange">**Try This:**</span> What happens if you type `if (0) { print('you did it!') }` or `if (1) { print('you did it!') }`? Why? Look back at the logical operators section for a hint.
+
+<span style="color:orange">**Try This:**</span> If your conditional statement is only one line, you can use this shortcut without all the brackets:
+
+```{r}
+if (TRUE) print('yay')
+```
+
+<span style="color:orange">**Try This:**</span> Create your own IF-ELSE statements. Try to use logical and comparison operators inside the parentheses, and to guess what the output will be before you run your code.
+
+<span style="color:orange">**Try This:**</span> Modify the code given for evaluating your letter grade to print something like this instead: "Your grade is 77. You earned a C." You will need the function `paste()` or `cat()` to accomplish this---use the Help menu if you get stuck.
+
+## PART 5: A VERY GENTLE Introduction to FOR Loops
+
+I'll say it right here: FOR loops give students a *lot* of trouble. We will cover them again in class, but I thought I'd provide a very gentle introduction to them here, so they'll be familiar.
+
+A **loop** does exactly what you think: loops around and around until you tell it to stop. There are two types of loops, but for now we will just focus on FOR loops. They work like this: FOR each value IN a list, do something. That's it, in a nutshell. Let's see an example where I want R to print out all of my roommates' names in order:
+
+```{r} 
+myRoommates <- c("Jonny", "Justin", "Zeyi")
+for (name in myRoommates) {
+  print(name)
+}
+```
+
+That wasn't so bad! I gave R a list of names, and it **looped** over each one and printed it for me. Let's say now that I want to sum the numbers 1 to 10. I could use `sum()` of course, but where's the fun in that?
+
+A common practice with loops is to define something outside the loop, and add to it every time the loop does its thing (we call this an **iteration**). For this example, let's create a variable called `total`. This is where we will be adding up our numbers. We **initialize** `total` at `0` because we have to start somewhere, and zero is the logical choice:
+
+```{r} 
+total <- 0
+```
+
+Okay, so now that we have our total, let's add to it:
+```{r}
+for (number in 1:10) {
+  total <- total + number
+}
+total
+```
+
+And we'll double-check just to be sure, using our logical operators:
+
+```{r}
+total == sum(1:10)
+```
+
+All right! That's it for FOR loops, for now. Nothing too intimidating, just doing the same thing over and over again to different values. They will come in handy later on, I promise. 
+
+<span style="color:orange">**Try This:**</span> Come up with your own FOR loop. What happens if you put a conditional IF-ELSE inside?
 
 ***
-And now we're done! You should now be familiar with ...
+And now we're done! You should now be familiar with different data classes, logical operators, conditional statements, and loops.
 
-When you're ready, move on to the next: "Okay, But What About Data?", in a file called "03_OkayButWhatAboutData.html".
+When you're ready, move on to the next module: [Okay, But What About Data?](https://rpubs.com/margaret-swift/intro-to-r-03-data).

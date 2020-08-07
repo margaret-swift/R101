@@ -7,13 +7,14 @@ output:
   prettydoc::html_pretty:
     theme: leonids
     toc: true
-    self_contained: false
 ---
+<base target="_blank"/>
+
 ***
 
 Welcome to ENV 710! I'm one of your TA's, Maggie, and I'm 
 going to be going through some of the basics of programming and R so that you
-all are ready when the class starts up.
+all are ready when class starts up.
 
 The focus of this module is to introduce all of you to R and RStudio, so you 
 can get a feel for what R is and how to use it. If you already have RStudio
@@ -41,7 +42,7 @@ One of the most frequent questions I get for this section is "What's the differe
  these things to read a novel, but it's definitely a lot easier than reading one long
  line of text.
  
- So, for this class, we need both the novel (R) and all the [fixins](https://www.quora.com/What-is-the-meaning-of-the-phrase-with-all-the-fixins) that make it easy to read (RStudio).
+ So, for this class, we need both the novel (R) and all the [fixins]() that make it easy to read (RStudio).
 
 ### The Novel: Steps to download and install R
 
@@ -83,7 +84,7 @@ where your files and packages are, and most importantly, use the Help menu.
 
 **Packages:** R is called an **open-source language**, which means that users can create free content called **packages** for anyone else to use. We will cover packages in the next module.
 
-**Help:** Use the Help menu when you don't know what something does. 
+**Help:** Use the Help menu when you don't know what something does. Type the function you're curious about into the search bar to pull up the documentation. If you need an example, just scroll down to the bottom of the page.
 
 **Viewer:** This lets you look at web content; you won't need it right now.
 
@@ -131,4 +132,4 @@ Anything you highlight will run in order. You can also run the selected code by 
 ***
 And now we're done! You should now be familiar with all the windows and panes in RStudio. Try going to your settings to customize how you want your RStudio to look. You'll be using this a lot, so it's worth your time. For me, I have my scripts in top left, console top right, environment bottom left, and plots/help bottom right.
 
-When you're ready, move on to the next: "Just the Basics", in a file called "02_JustTheBasics.html".
+When you're ready, move on to the next module: [Just the Basics](https://rpubs.com/margaret-swift/intro-to-r-02-basics).

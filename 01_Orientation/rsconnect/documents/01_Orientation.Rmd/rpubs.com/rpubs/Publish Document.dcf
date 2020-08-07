@@ -1,0 +1,10 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/646450/95e4aedf6fcc4a4aa043f1d90a5b9db0
+bundleId: https://api.rpubs.com/api/v1/document/646450/95e4aedf6fcc4a4aa043f1d90a5b9db0
+url: http://rpubs.com/margaret-swift/646450
+when: 1596808570.16596
